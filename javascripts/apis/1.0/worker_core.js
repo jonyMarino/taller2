@@ -118,7 +118,7 @@ var WorkerApp = function (worker, algorithmURI, api) {
 
     try {
 
-        this.userAlgorithm = algorithm();
+        this.userAlgorithm = algorithm("hola","chau");
 
     } catch (error) {
 

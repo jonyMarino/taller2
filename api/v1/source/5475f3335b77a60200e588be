@@ -1,8 +1,8 @@
 function* algorithm(frase,clave) {
 
-    
-    var palabra = "CONSERGGGGVATIONALISTZ" || frase;
-    var key = "ABCZ" || clave;
+	
+    var palabra = frase || "CONSERGGGGVATIONALISTZ" ;
+    var key = clave || "ABCZ" ;
     var key2="";
     var palabraEncriptada = "";
 
