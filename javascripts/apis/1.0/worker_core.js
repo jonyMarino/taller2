@@ -83,15 +83,15 @@ var WorkerApp = function (worker, algorithmURI, api) {
         // are imported or compressed in the a single file
 
         importScripts(
-            '/www.algomation.com/javascripts/underscore.js',
-            '/www.algomation.com/javascripts/underscore-string.js',
-            '/www.algomation.com/javascripts/regenerator-runtime.js',
-            '/www.algomation.com/javascripts/apis/' + api + '/core.js',
-            '/www.algomation.com/javascripts/apis/' + api + '/color.js',
-            '/www.algomation.com/javascripts/apis/' + api + '/layout.js',
-            '/www.algomation.com/javascripts/apis/' + api + '/element.js',
-            '/www.algomation.com/javascripts/apis/' + api + '/surface.js',
-            '/www.algomation.com/javascripts/apis/' + api + '/dagre.js'
+            '/javascripts/underscore.js',
+            '/javascripts/underscore-string.js',
+            '/javascripts/regenerator-runtime.js',
+            '/javascripts/apis/' + api + '/core.js',
+            '/javascripts/apis/' + api + '/color.js',
+            '/javascripts/apis/' + api + '/layout.js',
+            '/javascripts/apis/' + api + '/element.js',
+            '/javascripts/apis/' + api + '/surface.js',
+            '/javascripts/apis/' + api + '/dagre.js'
 
         );
 
