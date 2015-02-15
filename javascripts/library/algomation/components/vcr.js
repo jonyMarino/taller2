@@ -120,7 +120,7 @@ algo.components.Vcr.prototype.done = function () {
 
         // turn the continue button into a restart button and enabled slider
 
-        this.nextBtn.text("Restart");
+        this.nextBtn.text("Recomenzar");
         this.nextBtn.removeClass('disabled');
         this.slider.setEnabled(true);
     }
@@ -181,7 +181,7 @@ algo.components.Vcr.prototype.reset = function () {
 
     // ensure continue button has the correct text
 
-    this.nextBtn.text("Continue");
+    this.nextBtn.text("Continuar");
 
     // set button states according to controller state
 

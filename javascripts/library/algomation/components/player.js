@@ -659,8 +659,6 @@ algo.Player.prototype.historyTo = function (frameIndex) {
 
     if (this.commandHistory[frameIndex]) {
 
-        this.editor.pause(this.commandHistory[frameIndex].options);
-
         // update messages window
 
         this.messages.pause(this.commandHistory[frameIndex].options);
@@ -813,9 +811,6 @@ algo.Player.prototype.onWorkerMessage = function (event) {
 
             this.vcr.pause(event.data.options);
 
-            // update source window
-
-            this.editor.pause(event.data.options);
 
             // update messages window
 
@@ -869,9 +864,6 @@ algo.Player.prototype.onWorkerMessage = function (event) {
 
             this.vcr.done();
 
-            // update source window
-
-            this.editor.done(event.data.options);
 
             // update messages window
 
