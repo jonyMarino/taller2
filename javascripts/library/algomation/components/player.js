@@ -114,18 +114,7 @@ algo.Player = function (container) {
 
         }, this));
     }
-
-    // if, according to local storage, this is the users first trip to the player page show an brief message
-
-    if (!this.embedded && algo.App.I.getLocalSetting("showPlayerIntroduction", true)) {
-
-        // only do this once
-        algo.App.I.setLocalSetting("showPlayerIntroduction", false);
-
-        algo.App.I.message("Welcome", '<p><h4>You are viewing an algorithm on <b>Algomation.com</b></h4></p>' +
-        '<p>For helping in viewing, creating and sharing algorithms please visit the help pages</p>' +
-        '<p><a target="_blank" href="/help">Algomation Help</a></p>');
-    }
+ 
 
     // activate all tooltips within the editor DOM section
 
@@ -509,23 +498,7 @@ algo.Player.prototype.restart = function () {
 
     // reset or create the code editor window in read-only mode
 
-    if (this.editor) {
-
-        this.editor.reset();
-
-    } else {
-
-        if (!this.embedded) {
-
-            this.editor = new algo.components.JSEditor({
-                readOnly : true,
-                jqs      : '.algo-editor',
-                editorID : 'player-editor',
-                useWorker: false
-            });
-        }
-    }
-
+ 
     // worker_core.js is the primary thread file, it in turn will load the algorithm.
     // Use the full source if testing, otherwise, use the minified/compressed runtime
 
