@@ -19,7 +19,17 @@ algo.G = {
 };
 // controls whether ads are shown ( we don't want them on localhost )
 google_adtest = "off";
-</script><!-- standard master page header followed by app contant--><div style="height:8px"></div><!-- push everything else below the fixed header--><!--.navpadding--><script>$(document).ready(function () {
+</script>
+
+<!-- standard master page header followed by app contant-->
+<div style="min-height:8px">
+	<label for="frase">Frase: </label><textarea id="frase" rows="4" cols="50"></textarea>
+	<label for="clave">Clave: </label><input id="clave" type="text"/>
+	<input type="button" onClick="frase=document.getElementById('frase').value; clave=document.getElementById('clave').value; new algo.Player(play);" value="EncodeIt"/>
+</div>
+<!-- push everything else below the fixed header--><!--.navpadding-->
+
+<script>$(document).ready(function () {
     // create app
     
 	new algo.App();
