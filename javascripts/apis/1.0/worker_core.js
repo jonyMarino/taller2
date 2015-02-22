@@ -31,9 +31,6 @@ var globalScope = this;
  * @param event
  */
 self.onmessage = function (event) {
-
-	console.log(JSON.stringify(event.data));
-
     // handle named events
 
     switch (event.data.name) {
@@ -65,10 +62,8 @@ self.onmessage = function (event) {
  * @constructor
  */
 var WorkerApp = function (worker, algorithmURI, api, frase, clave) {
-	console.log("API"+api);
-	console.log("Frase: " + frase);
 	
-    // save the worker object so we can post messages using it
+	// save the worker object so we can post messages using it
     this.worker = worker;
 
     // make ourselves the singleton instance
@@ -120,8 +115,7 @@ var WorkerApp = function (worker, algorithmURI, api, frase, clave) {
     // create the users algorithm as a generator and start running it
 
     try {
-		console.log("Aca hay una frase " + frase);
-        this.userAlgorithm = algorithm(frase,clave);
+	    this.userAlgorithm = algorithm(frase,clave);
 
     } catch (error) {
 

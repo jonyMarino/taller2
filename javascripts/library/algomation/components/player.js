@@ -501,7 +501,6 @@ algo.Player.prototype.restart = function () {
  
     // worker_core.js is the primary thread file, it in turn will load the algorithm.
     // Use the full source if testing, otherwise, use the minified/compressed runtime
-	console.log("worker");
     if (this.testing) {
         this.worker = new Worker(_.sprintf('./javascripts/apis/%s/worker_core.js', this.algorithm.api))
     } else {
@@ -522,8 +521,6 @@ algo.Player.prototype.restart = function () {
         sourceURI += '?es6=true'
     }
 
-	console.log("Aca llamo al worker " + frase + ":" + clave);
-	
     this.worker.postMessage({
         name        : "M_Initialize",
         algorithmURI: sourceURI,
