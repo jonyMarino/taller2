@@ -118,11 +118,12 @@ algo.components.Vcr.prototype.done = function () {
 
     } else {
 
-        // turn the continue button into a restart button and enabled slider
-
+        // turn the continue button into a restart button and enabled slide
         this.nextBtn.text("Recomenzar");
         this.nextBtn.removeClass('disabled');
-        this.slider.setEnabled(true);
+        this.saveToPDFBtn.removeClass('disabled');
+		this.saveToTXTBtn.removeClass('disabled');
+		this.slider.setEnabled(true);
     }
 };
 
@@ -140,6 +141,8 @@ algo.components.Vcr.prototype.continue = function () {
         // disable continue button
 
         this.nextBtn.addClass('disabled');
+		this.saveToPDFBtn.addClass('disabled');
+		this.saveToTXTBtn.addClass('disabled');
 
         // disable slider
         this.slider.setEnabled(false);
@@ -157,6 +160,8 @@ algo.components.Vcr.prototype.continue = function () {
         // disable continue button
 
         this.nextBtn.addClass('disabled');
+		this.saveToPDFBtn.addClass('disabled');
+		this.saveToTXTBtn.addClass('disabled');
 
         // disable slider
 
@@ -182,6 +187,8 @@ algo.components.Vcr.prototype.reset = function () {
     // ensure continue button has the correct text
 
     this.nextBtn.text("Continuar");
+	this.saveToPDFBtn.addClass('disabled');
+	this.saveToTXTBtn.addClass('disabled');
 
     // set button states according to controller state
 

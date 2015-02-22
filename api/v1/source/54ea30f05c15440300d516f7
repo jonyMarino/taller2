@@ -54,6 +54,8 @@ function* algorithm(frase, clave) {
         yield * encriptar(f, k);
     }
 
+	console.log("FIN DEL ALGORTIMO: " + palabraDesencriptada);	
+	
     yield ({
         step: "¡Has concluido! \n",
         variables: {
