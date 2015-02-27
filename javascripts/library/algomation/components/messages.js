@@ -61,10 +61,16 @@ algo.components.Messages.prototype.pause = function (options) {
         this.variables.html('');
 
         _.each(options.variables, function (value, key) {
-
-            $('<div class="variable-name">' + key + '</div>' +
-              '<div class="variable-value">' + value + '</div>').appendTo(this.variables);
-
+			var divValue = "";
+			if (key=="resultado"){
+				divValue = '<div class="variable-value" id="resultado">' + value + '</div>';
+			}else{
+				divValue = '<div class="variable-value">' + value + '</div>';
+			}
+            $('<div class="variable-name">' + key + '</div>' + divValue).appendTo(this.variables);
+			if ( key == "i" && (value%20) == 0 && value != 0){
+				console.log("guardar");
+			}
         }, this);
 
         this.variablesBlock.removeClass('hidden');
