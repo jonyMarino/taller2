@@ -75,11 +75,7 @@ google_adtest = "off";
 </div>
 <!-- push everything else below the fixed header--><!--.navpadding-->
 <script type="text/javascript" src="./FileSaver.js-master/FileSaver.js"></script>
-<script type="text/javascript" src="./jsPDF/jspdf.js"></script>
-<script type="text/javascript" src="./jsPDF/jspdf.plugin.addimage.js"></script>
-<script type="text/javascript" src="./jsPDF/jspdf.plugin.standard_fonts_metrics.js"></script>
-<script type="text/javascript" src="./jsPDF/jspdf.plugin.split_text_to_size.js"></script>	
-<script type="text/javascript" src="./jsPDF/jspdf.plugin.from_html.js"></script>
+
 <script>
 	divPDF = $('<div id="divpdf" style=“display:none”></div>');
 	function encode() {
@@ -98,24 +94,7 @@ google_adtest = "off";
 			saveAs(blob, "resultado.txt");
 	};
 	function guardarSecuencia(){
-			var doc = new jsPDF();
-			// All units are in the set measurement for the document
-			// This can be changed to "pt" (points), "mm" (Default), "cm", "in"
-			$('body').append(divPDF);
-			var copiaDeSuperficie = $(".algo-surface").clone();
-			divPDF.append(copiaDeSuperficie);
-			// We'll make our own renderer to skip this editor
-			var specialElementHandlers = {
-				'#er': function(element, renderer){
-					return true;
-				}
-			};
-			doc.fromHTML($('#divpdf').get(0), 15, 15, {
-				'width': 170, 
-				'elementHandlers': specialElementHandlers
-			});
-			doc.output("dataurlnewwindow");
-			$('#divpdf').remove();
+
 	};
 </script>
 
