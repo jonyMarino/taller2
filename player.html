@@ -124,12 +124,14 @@ google_adtest = "off";
 					doc.setFontSize(40);
 					doc.text(35, 25, "Secuencia");
 					for( var i = 0; i< imagenes.length ; i++ ){
-							doc.addImage(imagenes[i], 'JPEG', 15, 40, 180, 160);
+						if ( i != 0 ){
+							doc.addPage();
+						}
+						doc.addImage(imagenes[i], 'JPEG', 15, 40, 180, 160);
 					}
 					
 					doc.output("dataurlnewwindow");
-					divPDF.remove();
-					divPDF = $('<div id="divpdf"></div>');
+					imagenes = new Array();
 				}
 			});
 	};

@@ -50,7 +50,7 @@ function* algorithm(frase,clave) {
         algo.SURFACE.root.children.destroy();
         var f = palabra.substring(i,i+20);
         var k = key2.substring(i,i+20);
-        yield * encriptar(f, k);
+        yield * encriptar(f, k,i);
     }
 
     yield ({
@@ -63,7 +63,7 @@ function* algorithm(frase,clave) {
     });
 
     // compare two words, displaying our progress as we go
-    function* encriptar(w1, w2) {
+    function* encriptar(w1, w2,index) {
 
         // get bounds of surface we are displayed on
         var bounds = algo.BOUNDS.inflate(-10, -100);
@@ -104,11 +104,11 @@ function* algorithm(frase,clave) {
         displayASCII(w1,1);
                 //=comienzo
         yield ({
-            step: _.sprintf("Encriptando %s con %s.", w1, w2),
+            step: _.sprintf("Encriptando %s con %s.", palabra, key),
             line: "comienzo",
             variables: {
-                "palabra": w1,
-                "clave": w2
+                "palabra": palabra,
+                "clave": key
             }
         });
         
@@ -130,7 +130,7 @@ function* algorithm(frase,clave) {
         rResultadoASCII=displayWord(a, 5);
 
         for(var i=0;i<w1.length;i++){
-            yield * encriptarCaracter(rCadena[i],clave[i],rResultado[i],rResultadoASCII[i],i);
+            yield * encriptarCaracter(rCadena[i],clave[i],rResultado[i],rResultadoASCII[i],i+index);
         }
         
     }
@@ -155,10 +155,8 @@ function* algorithm(frase,clave) {
         yield ({
             step: _.sprintf("Encriptando %s con %s: \n resultado[i]=palabra[i]-ascii(A) + clave2[i] -ascii(A)' mod 26+ascii(A)", cadena.text,clave.text),
             variables: {
-                "palabra":palabra,
-                "clave":key,
-                "i":i,
-                "resultado":palabraEncriptada,
+                "caracter":cadena.text,
+                "clave":clave.text
             }
             
         });
@@ -184,6 +182,17 @@ function* algorithm(frase,clave) {
         clave.set({
             state: algo.render.kS_NORMAL
         });   
+		        //=bigrams
+        yield ({
+            step: _.sprintf("Encriptando %s con %s: \n resultado[i]=palabra[i]-ascii(A) + clave2[i] -ascii(A)' mod 26+ascii(A)", cadena.text,clave.text),
+            variables: {
+                "palabra":palabra,
+                "clave":key,
+				"i":i,
+                "resultado":palabraEncriptada,
+            }
+            
+        });
 
         
     }
