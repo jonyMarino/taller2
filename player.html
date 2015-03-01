@@ -72,6 +72,7 @@ google_adtest = "off";
 	<label for="frase">Frase: </label><textarea id="frase" rows="4" cols="50"></textarea>
 	<label for="clave">Clave: </label><input id="clave" type="text"/>
 	<input type="button" onClick="encode()" value="EncodeIt"/>
+	<input type="file" onchange='readText(this)' />
 </div>
 <!-- push everything else below the fixed header--><!--.navpadding-->
 <script type="text/javascript" src="./FileSaver.js-master/FileSaver.js"></script>
@@ -86,6 +87,23 @@ google_adtest = "off";
 <script>
 	divPDF = $('<div id="divpdf"></div>');
 	imagenes = new Array();
+	var reader = new FileReader();
+
+	function readText(that){
+
+		if(that.files && that.files[0]){
+			var reader = new FileReader();
+			reader.onload = function (e) {  
+				var output=e.target.result;
+			
+				//process text to show only lines with "@":				
+				//output=output.split("\n").filter(/./.test, /\@/).join("\n");
+
+				document.getElementById('frase').innerHTML= output;
+			};//end onload()
+			reader.readAsText(that.files[0]);
+		}//end if html5 filelist support
+	} 
 	function encode() {
 		frase=$('#frase').val();
 		clave=$('#clave').val();
