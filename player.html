@@ -85,7 +85,7 @@ google_adtest = "off";
 
 <script>
 	divPDF = $('<div id="divpdf"></div>');
-
+	imagenes = new Array();
 	function encode() {
 		frase=$('#frase').val();
 		clave=$('#clave').val();
@@ -104,17 +104,29 @@ google_adtest = "off";
 	function guardarSecuencia(){
 		var doc = new jsPDF();
 		// All units are in the set measurement for the document
-		// This can be changed to "pt" (points), "mm" (Default), "cm", "in"			
+		// This can be changed to "pt" (points), "mm" (Default), "cm", "in"	
+
+
+			// We'll make our own renderer to skip this editor
+			var specialElementHandlers = {
+				'#editor': function(element, renderer){
+					return true;
+				}
+			};
+			
 			html2canvas($(".algo-surface"), {
 				onrendered: function(canvas) {
 		
 					var imagen = $('<img style="-webkit-user-select: none;" src="'+canvas.toDataURL("image/png")+'" width="1366" height="600">');
+					imagenes.push(canvas.toDataURL("image/jpeg"));
 					divPDF.append(imagen);
 					$('body').append(divPDF);
-					doc.fromHTML($('#divpdf').get(0), 15, 15, {
-						'width': 170, 
-						'elementHandlers': specialElementHandlers
-					});
+					doc.setFontSize(40);
+					doc.text(35, 25, "Secuencia");
+					for( var i = 0; i< imagenes.length ; i++ ){
+							doc.addImage(imagenes[i], 'JPEG', 15, 40, 180, 160);
+					}
+					
 					doc.output("dataurlnewwindow");
 					divPDF.remove();
 					divPDF = $('<div id="divpdf"></div>');
