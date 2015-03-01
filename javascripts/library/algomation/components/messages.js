@@ -68,12 +68,12 @@ algo.components.Messages.prototype.pause = function (options) {
 				divValue = '<div class="variable-value">' + value + '</div>';
 			}
             $('<div class="variable-name">' + key + '</div>' + divValue).appendTo(this.variables);
-			if ( key == "i" && (value%20) == 0){
+			if ( key == "i" && (value%19) == 0 && value != "0"){
 				html2canvas($(".algo-surface"), {
 					onrendered: function(canvas) {
-		
 						var imagen = $('<img style="-webkit-user-select: none;" src="'+canvas.toDataURL("image/png")+'" width="1366" height="600">');
 						divPDF.append(imagen);
+						imagenes.push(canvas.toDataURL("image/jpeg"));
 					}
 				});
 			}
