@@ -68,7 +68,7 @@ algo.components.Messages.prototype.pause = function (options) {
 				divValue = '<div class="variable-value">' + value + '</div>';
 			}
             $('<div class="variable-name">' + key + '</div>' + divValue).appendTo(this.variables);
-			if ( key == "i" && (value%20) == 0 && value != 0){
+			if ( key == "i" && (value%20) == 0){
 				console.log("guardar");
 			}
         }, this);

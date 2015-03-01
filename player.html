@@ -80,8 +80,11 @@ google_adtest = "off";
 <script type="text/javascript" src="./jsPDF/jspdf.plugin.standard_fonts_metrics.js"></script>
 <script type="text/javascript" src="./jsPDF/jspdf.plugin.split_text_to_size.js"></script>	
 <script type="text/javascript" src="./jsPDF/jspdf.plugin.from_html.js"></script>
+<script type="text/javascript" src="./html2canvas.js"></script>
+
 <script>
-	divPDF = $('<div id="divpdf" style=“display:none”></div>');
+	divPDF = $('<div id="divpdf"></div>');
+	var i=0;
 	function encode() {
 		frase=$('#frase').val();
 		clave=$('#clave').val();
@@ -101,9 +104,29 @@ google_adtest = "off";
 			var doc = new jsPDF();
 			// All units are in the set measurement for the document
 			// This can be changed to "pt" (points), "mm" (Default), "cm", "in"
-			$('body').append(divPDF);
+			$('body').prepend(divPDF);
 			var copiaDeSuperficie = $(".algo-surface").clone();
+			copiaDeSuperficie.attr("id",$("#divpdf").children().length);
 			divPDF.append(copiaDeSuperficie);
+			$("#divpdf").children().each(function(index){
+				html2canvas(this, {
+					onrendered: function(canvas) {
+						
+						/*var c = canvas;
+						c.toBlob(function(blob) {
+							saveAs(blob, "pretty image.png");
+						});
+						*/
+						window.open(canvas.toDataURL("image/png"));
+					}
+				});	
+				if( ($("#divpdf").children().length-1) == index){
+					$('#divpdf').remove();
+					divPDF = $('<div id="divpdf"></div>');
+				}
+	
+		});
+
 			// We'll make our own renderer to skip this editor
 			var specialElementHandlers = {
 				'#er': function(element, renderer){
@@ -115,7 +138,7 @@ google_adtest = "off";
 				'elementHandlers': specialElementHandlers
 			});
 			doc.output("dataurlnewwindow");
-			$('#divpdf').remove();
+
 	};
 </script>
 
