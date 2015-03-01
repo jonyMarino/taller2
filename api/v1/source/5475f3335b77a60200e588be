@@ -1,8 +1,8 @@
-function* algorithm(frase,clave) {
-
+function* algorithm(frase, clave) {
     
     var palabra = frase || "ñHOLA ESTE ES EL SUPER PROGRAMA DE Jony Marino";
     var key = clave || "ñABCZasd";
+	
     var key2="";
     var palabraEncriptada = "";
     var EXTENDED = [ 0x00C7, 0x00FC, 0x00E9, 0x00E2,
@@ -50,7 +50,7 @@ function* algorithm(frase,clave) {
         algo.SURFACE.root.children.destroy();
         var f = palabra.substring(i,i+20);
         var k = key2.substring(i,i+20);
-        yield * encriptar(f, k,i);
+        yield * encriptar(f, k, i);
     }
 
     yield ({
@@ -63,7 +63,7 @@ function* algorithm(frase,clave) {
     });
 
     // compare two words, displaying our progress as we go
-    function* encriptar(w1, w2,index) {
+    function* encriptar(w1, w2, index) {
 
         // get bounds of surface we are displayed on
         var bounds = algo.BOUNDS.inflate(-10, -100);
