@@ -500,13 +500,23 @@ algo.Player.prototype.restart = function () {
 
  
     // worker_core.js is the primary thread file, it in turn will load the algorithm.
+	switch(window.location.protocol) {
+	   case 'http:':
+	   case 'https:':
+		 this.worker = new Worker(_.sprintf('./javascripts/apis/%s/worker_core.js', this.algorithm.api))
+		 break;
+	   case 'file:':
+		 var blob = new Blob([
+			  document.querySelector('#worker1').textContent
+			], { type: "text/javascript" })
 
-	var blob = new Blob([
-      document.querySelector('#worker1').textContent
-    ], { type: "text/javascript" })
-
-    // Note: window.webkitURL.createObjectURL() in Chrome 10+.
-    this.worker = new Worker(window.URL.createObjectURL(blob))
+			// Note: window.webkitURL.createObjectURL() in Chrome 10+.
+			this.worker = new Worker(window.URL.createObjectURL(blob))
+		 break;
+	   default: 
+		 //some other protocol
+	}
+	
 
     // sink message event
 

@@ -122,14 +122,24 @@ function* algorithm(frase, clave) {
             step: _.sprintf("Extender la clave para que llegue a toda la frase", w1, w2),
             line: "extender clave",
             variables: {
-                "palabra": w1,
-                "clave": w2
+                "palabra": palabra,
+                "clave": key
             }
         });
         
         var a = new Array(w1.length);
         rResultado=displayWord(a, 4);
         rResultadoASCII=displayWord(a, 5);
+		
+		//=preparado para encriptar
+         yield ({
+            step: _.sprintf("preparado para encriptar"),
+            line: "preparado para encriptar",
+            variables: {
+                "palabra": palabra,
+                "clave": key
+            }
+        });
 
         for(var i=0;i<w1.length;i++){
             yield * desencriptarCaracter(rCadena[i],clave[i],rResultado[i],rResultadoASCII[i],i+index);
@@ -157,8 +167,8 @@ function* algorithm(frase, clave) {
         yield ({
             step: _.sprintf("Desencriptando %s con %s: \n resultado[i]=palabra[i]-ascii(A) + clave2[i] -ascii(A)' mod 26+ascii(A)", cadena.text,clave.text),
             variables: {
-                "caracter":cadena.text,
-                "clave":clave.text
+                "palabra":palabra,
+                "clave":key
             }
             
         });

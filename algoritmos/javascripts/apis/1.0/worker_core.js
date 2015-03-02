@@ -41,7 +41,7 @@ self.onmessage = function (event) {
         {
             // create the singleton app for this worker and supply the worker object so it can send messages
 
-            new WorkerApp(this, event.data.algorithmURI, event.data.api, event.data.frase, event.data.clave);
+            new WorkerApp(this, event.data.algorithmID, event.data.api, event.data.frase, event.data.clave,event.data.url);
         }
             break;
 
@@ -61,7 +61,7 @@ self.onmessage = function (event) {
  * the application class that runs in this worker
  * @constructor
  */
-var WorkerApp = function (worker, algorithmURI, api, frase, clave) {
+var WorkerApp = function (worker, algorithmID, api, frase, clave, direccion) {
 	
 	// save the worker object so we can post messages using it
     this.worker = worker;
@@ -81,15 +81,15 @@ var WorkerApp = function (worker, algorithmURI, api, frase, clave) {
         // are imported or compressed in the a single file
 
         importScripts(
-            '/javascripts/underscore.js',
-            '/javascripts/underscore-string.js',
-            '/javascripts/regenerator-runtime.js',
-            '/javascripts/apis/' + api + '/core.js',
-            '/javascripts/apis/' + api + '/color.js',
-            '/javascripts/apis/' + api + '/layout.js',
-            '/javascripts/apis/' + api + '/element.js',
-            '/javascripts/apis/' + api + '/surface.js',
-            '/javascripts/apis/' + api + '/dagre.js'
+            direccion+'/javascripts/underscore.js',
+			direccion+'/javascripts/underscore-string.js',
+			direccion+'/javascripts/regenerator-runtime.js',
+			direccion+'/javascripts/apis/' + api + '/core.js',
+			direccion+'/javascripts/apis/' + api + '/layout.js',
+			direccion+'/javascripts/apis/' + api + '/color.js',
+			direccion+'/javascripts/apis/' + api + '/element.js',
+			direccion+'/javascripts/apis/' + api + '/surface.js',
+			direccion+'/javascripts/apis/' + api + '/dagre.js'
 
         );
 
@@ -110,7 +110,7 @@ var WorkerApp = function (worker, algorithmURI, api, frase, clave) {
 
     // load the actual file containing the algorithm.
 
-    importScripts(algorithmURI);
+    importScripts(direccion+"/api/v1/source/"+algorithmID);
 
     // create the users algorithm as a generator and start running it
 
