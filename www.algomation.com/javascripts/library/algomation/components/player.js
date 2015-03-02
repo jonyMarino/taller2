@@ -520,13 +520,18 @@ algo.Player.prototype.restart = function () {
     if (this.nativeGenerators) {
         sourceURI += '?es6=true'
     }
-
+	var direccion = document.location.href;	
+	var index = direccion.indexOf('player.html');
+	if (index != -1) {
+		direccion = direccion.substring(0, index);
+	}
     this.worker.postMessage({
         name        : "M_Initialize",
-        algorithmURI: sourceURI,
+        algorithmID: this.algorithmID,
         api         : this.algorithm.api,
 		frase 		: frase,
-		clave 		: clave
+		clave 		: clave,
+		direccion:direccion
     });
 
 };
