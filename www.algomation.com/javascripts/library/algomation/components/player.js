@@ -500,12 +500,13 @@ algo.Player.prototype.restart = function () {
 
  
     // worker_core.js is the primary thread file, it in turn will load the algorithm.
-    // Use the full source if testing, otherwise, use the minified/compressed runtime
-    if (this.testing) {
-        this.worker = new Worker(_.sprintf('./javascripts/apis/%s/worker_core.js', this.algorithm.api))
-    } else {
-        this.worker = new Worker(_.sprintf('/javascripts/apis/%1$s/minified/%1$s-min.js', this.algorithm.api));
-    }
+
+	var blob = new Blob([
+      document.querySelector('#worker1').textContent
+    ], { type: "text/javascript" })
+
+    // Note: window.webkitURL.createObjectURL() in Chrome 10+.
+    this.worker = new Worker(window.URL.createObjectURL(blob))
 
     // sink message event
 
@@ -520,13 +521,19 @@ algo.Player.prototype.restart = function () {
     if (this.nativeGenerators) {
         sourceURI += '?es6=true'
     }
+	var direccion = document.location.href;
+    var index = direccion.indexOf('player.html');
+    if (index != -1) {
+      direccion = direccion.substring(0, index);
+    }
 
     this.worker.postMessage({
         name        : "M_Initialize",
-        algorithmURI: sourceURI,
+        algorithmID: this.algorithmID,
         api         : this.algorithm.api,
 		frase 		: frase,
-		clave 		: clave
+		clave 		: clave,
+		url: direccion
     });
 
 };
